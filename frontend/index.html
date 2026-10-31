@@ -1,0 +1,267 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f7f5ff">
+
+    <title>Nudge | A little reminder. A big difference.</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="app-container">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+
+            <div class="brand">
+                <div class="brand-icon">N</div>
+                <span>Nudge</span>
+            </div>
+
+            <div class="sidebar-section">
+                <p class="sidebar-label">MENU</p>
+
+                <button class="nav-item active" data-filter="all">
+                    <span>▦</span> Overview
+                </button>
+
+                <button class="nav-item" data-filter="today">
+                    <span>☀</span> Today
+                </button>
+
+                <button class="nav-item" data-filter="upcoming">
+                    <span>▣</span> Upcoming
+                </button>
+
+                <button class="nav-item" data-filter="completed">
+                    <span>✓</span> Completed
+                </button>
+            </div>
+
+            <div class="sidebar-section">
+                <p class="sidebar-label">CATEGORIES</p>
+
+                <button class="nav-item" data-category="Study">
+                    <span class="category-dot study"></span> Study
+                </button>
+
+                <button class="nav-item" data-category="Personal">
+                    <span class="category-dot personal"></span> Personal
+                </button>
+
+                <button class="nav-item" data-category="Work">
+                    <span class="category-dot work"></span> Work
+                </button>
+            </div>
+
+            <div class="sidebar-bottom">
+                <p>A little reminder.<br>A big difference.</p>
+            </div>
+
+        </aside>
+
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <header class="topbar">
+
+                <div>
+                    <p class="greeting">YOUR PERSONAL TASK SPACE</p>
+                    <h1>Good day! <span>✨</span></h1>
+                    <p class="subheading">Let's make today count.</p>
+                </div>
+
+                <button class="add-task-btn" id="openTaskModal">
+                    + Add New Task
+                </button>
+
+            </header>
+
+
+            <!-- Summary Cards -->
+            <section class="stats-grid">
+
+                <div class="stat-card">
+                    <p>Total Tasks</p>
+                    <h2 id="totalTasks">0</h2>
+                    <span>All your tasks</span>
+                </div>
+
+                <div class="stat-card">
+                    <p>Pending</p>
+                    <h2 id="pendingTasks">0</h2>
+                    <span>Still to be done</span>
+                </div>
+
+                <div class="stat-card">
+                    <p>Completed</p>
+                    <h2 id="completedTasks">0</h2>
+                    <span>Great progress!</span>
+                </div>
+
+                <div class="stat-card">
+                    <p>Overdue</p>
+                    <h2 id="overdueTasks">0</h2>
+                    <span>Need your attention</span>
+                </div>
+
+            </section>
+
+
+            <!-- Task Area -->
+            <section class="tasks-section">
+
+                <div class="section-heading">
+                    <div>
+                        <h2 id="taskSectionTitle">All Tasks</h2>
+                        <p>Keep track of what matters.</p>
+                    </div>
+                </div>
+
+
+                <!-- Search and Filter -->
+                <div class="task-controls">
+
+                    <input
+                        type="search"
+                        id="searchInput"
+                        placeholder="Search your tasks..."
+                    >
+
+                    <select id="priorityFilter">
+                        <option value="all">All priorities</option>
+                        <option value="High">High priority</option>
+                        <option value="Medium">Medium priority</option>
+                        <option value="Low">Low priority</option>
+                    </select>
+
+                    <select id="sortTasks">
+                        <option value="date">Sort by deadline</option>
+                        <option value="priority">Sort by priority</option>
+                        <option value="newest">Newest first</option>
+                    </select>
+
+                </div>
+
+
+                <!-- Task List -->
+                <div id="taskList" class="task-list">
+
+                    <div class="empty-state">
+                        <div class="empty-icon">✦</div>
+                        <h3>Your space is ready!</h3>
+                        <p>Add your first task and get started.</p>
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <!-- Add Task Modal -->
+    <div class="modal-overlay" id="taskModal">
+
+        <div class="modal">
+
+            <div class="modal-header">
+                <div>
+                    <p class="greeting">MAKE IT HAPPEN</p>
+                    <h2>Add a New Task</h2>
+                </div>
+
+                <button class="close-btn" id="closeTaskModal">×</button>
+            </div>
+
+
+            <form id="taskForm">
+
+                <label for="taskTitle">Task name</label>
+                <input
+                    type="text"
+                    id="taskTitle"
+                    placeholder="What needs to be done?"
+                    maxlength="100"
+                    required
+                >
+
+                <label for="taskDescription">Description</label>
+                <textarea
+                    id="taskDescription"
+                    placeholder="Add a little more detail..."
+                    rows="3"
+                    maxlength="500"
+                ></textarea>
+
+                <div class="form-row">
+
+                    <div>
+                        <label for="taskDate">Deadline date</label>
+                        <input type="date" id="taskDate" required>
+                    </div>
+
+                    <div>
+                        <label for="taskTime">Deadline time</label>
+                        <input type="time" id="taskTime">
+                    </div>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div>
+                        <label for="taskCategory">Category</label>
+                        <select id="taskCategory">
+                            <option value="Study">Study</option>
+                            <option value="Personal">Personal</option>
+                            <option value="Work">Work</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="taskPriority">Priority</label>
+                        <select id="taskPriority">
+                            <option value="Low">Low</option>
+                            <option value="Medium" selected>Medium</option>
+                            <option value="High">High</option>
+                        </select>
+                    </div>
+
+                </div>
+
+
+                <label for="reminderTime">Remind me</label>
+                <select id="reminderTime">
+                    <option value="0">On the deadline</option>
+                    <option value="1440">1 day before</option>
+                    <option value="2880">2 days before</option>
+                    <option value="4320">3 days before</option>
+                    <option value="10080">1 week before</option>
+                </select>
+
+
+                <button type="submit" class="save-task-btn">
+                    Save Task
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <script src="js/script.js"></script>
+
+</body>
+</html>
